@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Inicio</title>
+</head>
+<body>
+    <style>
+        body {
+            background-color: yellow;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 6vh;
+            margin: 0;
+
+        }
+
+        /* Contenedor principal blanco */
+        .cuerpo {
+            background-color: white;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            box-shadow: 4px 4px 17px rgba(0, 0, 0, 0.9); /* Sombra */
+            
+        }
+ /* Lista en la parte superior */
+ .lista {
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 5px;
+        }
+
+        .lista ul {
+            list-style-type: none;
+            margin-top: 12px;
+            margin-right: 20px;
+            font-size: 30px;
+        }
+
+        .lista ul li {
+            float: right;
+            padding: 10px 20px;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color: rgba(255, 255, 0, 0.689);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.9);
+
+        }
+
+        .lista ul li a{
+            text-decoration: none;
+            color: black;
+            border-radius: 20px;
+        }
+        .img{
+            width: 90%;
+            height: 65vh;
+            border-radius: 20px;
+            float: left;
+        }
+
+        .section1{
+            margin-top: 50px;
+            text-align: center;
+            width: 30%;
+            float: left;    
+        }
+
+        .section2{
+            width: 70%;
+            float: right;
+            text-align: center;
+        }
+
+        h1{
+            text-shadow: 3px 3px 3px rgba(255, 255, 0, 0.607);
+        }
+
+    </style>
+<div class="cuerpo">
+    <div class="lista">
+        <ul>
+            <li><a href="/inicio" class="ins">Iniciar Sesión</a></li>
+        </ul>
+    </div>
+    <br>
+    <div class="iniciar">
+        <div class="section1">
+            <h1 class="h1">¡LA MEJOR TIENDA!</h1>
+            <h2>Equipo 3</h2>
+            <p>Lopez Salinas Kiev</p>
+            <p>Lara Villegas Esteban</p>
+            <p>Nieves Sandoval Roberto Gael</p>
+            <p>Olvera Gil Leonel</p>
+            <h3>5IV7</h3>
+        </div>
+        <div class="section2">
+            <img src="/img/fondo.jpg" alt="carro" class="img">  
+        </div>
+    </div>
+    <br>
+</body>
+</html>

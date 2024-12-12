@@ -1,0 +1,18 @@
+header{
+    background-color: rgba(28, 171, 207, 0.651);
+    height: 12vh;
+    font-size: 20px;
+    align-content: center;
+}
+
+header ul{
+    list-style-type: none;
+    margin-right: 20px;
+    display: flex;
+    color: white;
+    text-decoration: none;
+}
+
+header ul li{
+    padding-left: 10%;
+}

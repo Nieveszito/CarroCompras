@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrito de Compras</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+            padding-bottom: 100px; /* Añadido espacio inferior para evitar que el footer tape el contenido */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #dadd3a;
+        }
+
+        .navbar ul {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar ul li {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .navbar ul li a:hover {
+            color: #dadd3a;
+        }
+
+        /* Carrito */
+        .cart-container {
+            margin: 2rem;
+        }
+
+        .cart-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .cart-items {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .cart-items .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f1f1f1;
+        }
+
+        .cart-items .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-items img {
+            max-width: 80px;
+            border-radius: 10px;
+        }
+
+        .cart-item-details {
+            flex: 1;
+            margin-left: 1rem;
+        }
+
+        .cart-item-details h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .cart-item-details p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .quantity {
+            display: flex;
+            align-items: center;
+        }
+
+        .quantity input {
+            width: 40px;
+            padding: 0.5rem;
+            text-align: center;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .remove-btn {
+            background-color: #ff4d4d;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            border: none; /* Sin borde */
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: #e63939; /* Cambia ligeramente el color */
+        }
+
+        /* Resumen del carrito */
+        .cart-summary {
+            display: flex;
+            justify-content: flex-end;
+            align-items: flex-end;
+            flex-direction: column;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 1.5rem;
+            text-align: right;
+        }
+
+        .cart-summary .total {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+        }
+
+        .cart-summary .checkout-btn {
+            background-color: #28a745; /* Verde */
+            padding: 1rem 2rem;
+            color: white;
+            font-weight: bold;
+            border-radius: 25px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-bottom: 0.5rem;
+            border: none; /* Sin borde */
+        }
+
+        .cart-summary .checkout-btn:hover {
+            background-color: #218838;
+        }
+
+        .cart-summary .vaciar-btn {
+            background-color: #dc3545; /* Rojo */
+            padding: 0.7rem 1.5rem;
+            color: white;
+            font-weight: bold;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none; /* Sin borde */
+        }
+
+        .cart-summary .vaciar-btn:hover {
+            background-color: #c82333;
+        }
+
+        /* Modal */
+        .modal {
+            display: none; /* Inicialmente escondido */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5); /* Fondo oscuro */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 8px;
+            text-align: center;
+            width: 300px;
+        }
+
+        .modal .modal-button {
+            padding: 0.8rem 2rem;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .modal .modal-button:hover {
+            background-color: #c82333;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+        .footer a {
+            color: #dadd3a;
+        }
+
+        .empty-cart-message {
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="logo">TiendaBatiz</div>
+        <ul>
+            <li><a href="/productos">Inicio</a></li>
+            <li><a href="#">Categorías</a></li>
+            <li><a href="#">Ofertas</a></li>
+        </ul>
+    </nav>
+
+    <!-- Carrito -->
+    <!-- Carrito -->
+    <div class="cart-container">
+        <h2>Tu Carrito</h2>
+        <% if (cart.length === 0) { %>
+            <p>No tienes productos en el carrito.</p>
+        <% } else { %>
+            <div class="cart-items">
+                <% cart.forEach(item => { %>
+                    <div class="cart-item">
+                        <!-- Asegúrate de que la propiedad de la imagen sea correcta -->
+                        <img src="https://via.placeholder.com/80" alt="<%= item.nombre_prod %>">
+                        <div class="cart-item-details">
+                            <h3><%= item.nombre_prod %></h3>
+                            <p><%= item.desc_prod %></p> <!-- Descripción del producto -->
+                        </div>
+                        <div class="quantity">
+                            <input class="quantity-input" type="number" value="<%= item.quantity %>" min="1" max="<%= item.cantidad_prod %>">
+                        </div>
+                        <!-- Cambia 'precioNormal_prod' en lugar de 'price' -->
+                        <span class="item-price" data-price="<%= item.precioNormal_prod %>">$<%= (item.precioNormal_prod * item.quantity).toFixed(2) %></span>
+                        <button class="remove-btn" data-id="<%= item.id_prod %>">Eliminar</button>
+                    </div>
+                <% }) %>
+            </div>
+        <% } %>
+    
+        <!-- Resumen del carrito -->
+        <div class="cart-summary">
+            <p class="total">Total: $<%= total.toFixed(2) %></p>
+            <button class="vaciar-btn">Vaciar carrito</button>
+        </div>
+    </div>
+    
+    
+
+
+    <!-- Modal de confirmación -->
+    <div class="modal" id="confirmModal">
+        <div class="modal-content">
+            <p>¿Estás seguro de que deseas vaciar el carrito?</p>
+            <button class="modal-button" id="confirmYes">Sí, vaciar</button>
+            <button class="modal-button" id="confirmNo">No</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2024 TiendaOnline. Todos los derechos reservados. | <a href="#">Política de Privacidad</a></p>
+    </footer>
+
+    <script>
+        const cartItems = document.querySelector('.cart-items');
+        const totalElement = document.querySelector('.cart-summary .total');
+        const emptyCartMessage = document.querySelector('.empty-cart-message');
+        const vaciarButton = document.querySelector('.vaciar-btn');
+        const confirmModal = document.getElementById('confirmModal');
+        const confirmYes = document.getElementById('confirmYes');
+        const confirmNo = document.getElementById('confirmNo');
+    
+        let cart = []; // Array para almacenar los productos del carrito
+    
+        // Función para renderizar el carrito en la interfaz
+        function renderCart() {
+            cartItems.innerHTML = ''; // Limpiar el contenedor de productos
+    
+            cart.forEach(product => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('cart-item');
+                cartItem.innerHTML = `
+                    <img src="https://via.placeholder.com/80" alt="${product.name}">
+                    <div class="cart-item-details">
+                        <h3>${product.name}</h3>
+                        <p>Stock disponible: ${product.stock}</p>
+                    </div>
+                    <div class="quantity">
+                        <input class="quantity-input" type="number" value="${product.quantity}" min="1" max="${product.stock}">
+                    </div>
+                    <span class="item-price" data-price="${product.price}">$${(product.price * product.quantity).toFixed(2)}</span>
+                    <button class="remove-btn" data-id="${product.id}">Eliminar</button>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+    
+            updateTotal(); // Actualizar el total
+            checkCartEmpty(); // Verificar si el carrito está vacío
+        }
+    
+        // Actualiza el total del carrito
+        function updateTotal() {
+            let total = 0;
+            cart.forEach(product => {
+                total += product.price * product.quantity;
+            });
+            totalElement.textContent = `Total: $${total.toFixed(2)}`;
+        }
+    
+        // Verifica si el carrito está vacío
+        function checkCartEmpty() {
+            if (cart.length === 0) {
+                emptyCartMessage.style.display = 'block'; // Mostrar mensaje de carrito vacío
+                totalElement.textContent = 'Total: $0.00';
+            } else {
+                emptyCartMessage.style.display = 'none'; // Ocultar mensaje de carrito vacío
+            }
+        }
+    
+        // Maneja el evento de clic en los botones "Agregar al Carrito"
+        document.addEventListener('click', (event) => {
+            if (event.target.classList.contains('add-to-cart-btn')) {
+                const productId = event.target.dataset.id;
+                const productName = event.target.dataset.name;
+                const productPrice = parseFloat(event.target.dataset.price);
+                const productStock = parseInt(event.target.dataset.stock, 10);
+    
+                // Verificar si el producto ya está en el carrito
+                const existingProduct = cart.find(item => item.id === productId);
+                if (existingProduct) {
+                    if (existingProduct.quantity < productStock) {
+                        existingProduct.quantity += 1;
+                    } else {
+                        alert('No puedes agregar más de este producto. Stock agotado.');
+                    }
+                } else {
+                    if (productStock > 0) {
+                        cart.push({ id: productId, name: productName, price: productPrice, quantity: 1, stock: productStock });
+                    } else {
+                        alert('Producto fuera de stock.');
+                    }
+                }
+    
+                renderCart();
+            }
+        });
+    
+        // Escucha cambios en las cantidades de los productos
+        cartItems.addEventListener('input', (event) => {
+            if (event.target.classList.contains('quantity-input')) {
+                const productId = event.target.closest('.cart-item').querySelector('.remove-btn').dataset.id;
+                const newQuantity = parseInt(event.target.value, 10);
+                const product = cart.find(item => item.id === productId);
+    
+                if (product) {
+                    if (newQuantity > 0 && newQuantity <= product.stock) {
+                        product.quantity = newQuantity;
+                    } else {
+                        alert(`La cantidad debe estar entre 1 y ${product.stock}`);
+                        event.target.value = product.quantity; // Restablecer cantidad previa
+                    }
+                }
+    
+                renderCart();
+            }
+        });
+    
+        // Maneja la eliminación de productos
+        cartItems.addEventListener('click', (event) => {
+            if (event.target.classList.contains('remove-btn')) {
+                const productId = event.target.dataset.id;
+                cart = cart.filter(item => item.id !== productId); // Eliminar producto del carrito
+                renderCart();
+            }
+        });
+    
+        // Vaciar el carrito
+        vaciarButton.addEventListener('click', () => {
+            confirmModal.style.display = 'flex';
+        });
+    
+        // Confirmación para vaciar el carrito
+        confirmYes.addEventListener('click', () => {
+            cart = []; // Vaciar el carrito
+            renderCart(); // Renderizar el carrito vacío
+            confirmModal.style.display = 'none'; // Cerrar modal
+        });
+    
+        confirmNo.addEventListener('click', () => {
+            confirmModal.style.display = 'none'; // Cerrar modal
+        });
+    
+        // Inicializar el total y verificar si el carrito está vacío al cargar la página
+        renderCart();
+    </script>
+    
+</body>
+</html>
+
+

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Index</title>
+</head>
+<body>
+    <style>
+
+
+        body{
+            background-color: rgba(255, 255, 0, 0.689);
+        }
+
+
+        /* Contenedor principal blanco */
+        .cuerpo {
+            background-color: white;
+            width: 90%;
+            height: 90%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            margin-left: 4%;
+            box-shadow: 4px 4px 17px rgba(0, 0, 0, 0.9); /* Sombra */
+            
+        }
+
+        /* Lista en la parte superior */
+        .lista {
+            text-align: center;
+            text-shadow: 5px;
+        }
+
+        .lista ul {
+            list-style-type: none;
+            display: flex;
+            font-size: 30px;
+        }
+
+        .lista ul li {
+            padding: 10px 10px;
+            margin-left: 7%;
+            cursor: pointer;
+            background-color: rgb(225, 223, 223);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .lista ul li a{
+            text-decoration: none;
+            color: black;
+            border-radius: 20px;
+            font-style: oblique;
+        }
+
+        .categorias {
+            text-align: center;
+            text-shadow: 5px;
+        }
+
+        .categorias ul {
+            list-style-type: none;
+            display: flex;
+            font-size: 30px;
+        }
+
+        .categorias ul li {
+            padding: 10px 10px;
+            border-radius: 10px;
+            margin-left: 9%;
+            cursor: pointer;
+            background-color: rgba(255, 255, 0, 0.689);
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.9);
+        }
+
+        .categorias ul li a{
+            text-decoration: none;
+            color: black;
+            border-radius: 20px;
+            font-style: italic;
+        }
+
+        .section1{
+            text-align: center;
+            float: left;
+            width: 100%;
+            border-radius: 20px;
+        }
+
+        .section2{
+            padding-top: 3vh;
+            background-color: antiquewhite;
+        }
+
+        .bienvenida{
+            font-size: 100px;
+            text-align: center;
+            font-style: oblique;
+        }
+
+
+    </style>
+    
+        <div class="lista">
+            <ul>
+                <li><a href="iniciossion.html" class="ins">Usuario</a></li>
+                <li><a href="index.html" class="ins">Inicio</a></li>
+                <li><a href="/ventas" class="ins">Ventas</a></li>
+                <li><a href="/carrito" class="ins">Carrito</a></li>
+                <li><a href="iniciossion.html" class="ins">Proveedores</a></li>
+                <li><a href="iniciossion.html" class="ins">Cerrar Sesión</a></li>
+            </ul>
+        </div>
+    <div class="cuerpo">
+            <div class="section2">
+                <p class="bienvenida">¡Escoge una categoria para comenzar!</p>
+            </div>
+            <div class="section1">
+                <div class="categorias">
+                    <ul>
+                        <li><a href="iniciossion.html" class="ins">Deporte</a></li>
+                        <li><a href="iniciossion.html" class="ins">Comida</a></li>
+                        <li><a href="iniciossion.html" class="ins">Bebida</a></li>
+                        <li><a href="iniciossion.html" class="ins">Ropa</a></li>
+                        <li><a href="iniciossion.html" class="ins">Electronico</a></li>
+                    </ul>
+                </div>
+            </div>
+    </div>
+    <br>
+
+</body>
+</html>

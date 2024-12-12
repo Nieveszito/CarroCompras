@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tienda Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f4f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            padding: 1rem 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #dadd3a;
+        }
+
+        .navbar ul {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar ul li {
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        .navbar ul li a:hover {
+            color: #dadd3a;
+        }
+
+        .navbar .search-bar {
+            position: relative;
+        }
+
+        .navbar .search-bar input {
+            width: 250px;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            outline: none;
+        }
+
+        .navbar .search-bar i {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #999;
+        }
+
+        /* Banner */
+        .banner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem;
+            background: linear-gradient(to right, #dadd3a, #a6a82c);
+            color: white;
+            border-radius: 10px;
+            margin: 2rem;
+        }
+
+        .banner img {
+            max-width: 40%;
+            border-radius: 10px;
+        }
+
+        .banner .content {
+            flex: 1;
+            padding: 1rem;
+        }
+
+        .banner .content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner .content p {
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .banner .content a {
+            padding: 0.7rem 1.5rem;
+            background-color: #fff;
+            color: #a6a82c;
+            font-weight: bold;
+            border-radius: 25px;
+            transition: background 0.3s;
+        }
+
+        .banner .content a:hover {
+            background-color: #a6a82c;
+            color: #fff;
+        }
+
+        /* Categorías */
+        .categories {
+            margin: 2rem;
+        }
+
+        .categories h2 {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: #333;
+        }
+
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .category-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .category-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        /* Productos */
+        .products-container {
+            margin: 2rem;
+            display: none; /* Ocultado por defecto */
+        }
+
+        .products-container h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+        }
+
+        .product-card {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            padding: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .product-card img {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .product-card h3 {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .product-card p {
+            font-size: 1rem;
+            color: #666;
+        }
+
+        .add-to-cart-btn {
+            background-color: #dadd3a;
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-top: 1rem;
+            border: none;
+            transition: background 0.3s;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: #a6a82c;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-align: center;
+        }
+
+        .footer a {
+            color: #dadd3a;
+        }
+
+    </style>
+</head>
+
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar">
+            <div class="logo">TiendaBatiz</div>
+            <ul>
+                <li><a href="#">Categorías</a></li>
+                <li><a href="#">Ofertas</a></li>
+                <li><a href="/carrito">Carrito</a></li>
+            </ul>
+            <div class="search-bar">
+                <input type="text" placeholder="Buscar productos...">
+                <i class="fas fa-search"></i>
+            </div>
+        </nav>
+    
+        <!-- Banner -->
+        <div class="banner">
+            <div class="content">
+                <h1>¡Descubre los mejores productos!</h1>
+                <p>Aprovecha nuestras ofertas exclusivas y encuentra todo lo que necesitas en un solo lugar.</p>
+                <a href="#">Explorar ahora</a>
+            </div>
+            <img src="img/Logo-index.jpg" alt="Promoción">
+        </div>
+    
+        <!-- Categorías -->
+        <section class="categories">
+            <h2>Categorías Populares</h2>
+            <div class="categories-wrapper">
+                <div class="categories-grid" id="categories">
+                    <div class="category-card" data-category="1">
+                        <img src="img/sec-deportes.jpg" alt="Deportes">
+                        <h3>Deportes</h3>
+                    </div>
+                    <div class="category-card" data-category="3">
+                        <img src="img/sec-electronica.png" alt="Electrónica">
+                        <h3>Electrónica</h3>
+                    </div>
+                    <div class="category-card" data-category="4">
+                        <img src="img/ropa.jpg" alt="Ropa">
+                        <h3>Ropa</h3>
+                    </div>
+                    <div class="category-card" data-category="2">
+                        <img src="img/comida.jpg" alt="Comida">
+                        <h3>Comida</h3>
+                    </div>
+                    <div class="category-card" data-category="5">
+                        <img src="img/sec-higiene.jpg" alt="Higiene">
+                        <h3>Higiene</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Productos -->
+        <section class="products-container" id="products-container" style="display:none;">
+            <h2>Productos</h2>
+            <div class="products-grid" id="products-grid">
+                <!-- Productos dinámicos aquí -->
+            </div>
+        </section>
+    
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2024 TiendaOnline. Todos los derechos reservados. | <a href="#">Política de Privacidad</a></p>
+        </footer>
+    
+        <script>
+            document.querySelectorAll('.category-card').forEach(category => {
+                category.addEventListener('click', (event) => {
+                    const categoryId = event.currentTarget.getAttribute('data-category');
+        
+                    // Realizar una solicitud AJAX para obtener los productos
+                    fetch(`/productos/${categoryId}`)
+                        .then(response => response.json())
+                        .then(products => {
+                            const productGrid = document.getElementById('products-grid');
+                            productGrid.innerHTML = ''; // Limpiar productos previos
+        
+                            // Renderizar productos
+                            products.forEach(product => {
+                                const productCard = document.createElement('div');
+                                productCard.classList.add('product-card');
+                                productCard.innerHTML = `
+                                    <img src="img/sec-electronica.png" alt="${product.nombre_prod}">
+                                    <h3>${product.nombre_prod}</h3>
+                                    <p>$${product.precio2_prod}</p>
+                                    <button class="add-to-cart-btn" data-id="${product.id_prod}" data-name="${product.nombre_prod}" data-price="${product.precio2_prod}">Agregar al Carrito</button>
+                                `;
+                                productGrid.appendChild(productCard);
+                            });
+        
+                            // Mostrar la sección de productos
+                            document.getElementById('products-container').style.display = 'block';
+                        })
+                        .catch(error => {
+                            console.error('Error al cargar los productos:', error);
+                        });
+                });
+            });
+
+            // Script para agregar productos al carrito
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            document.addEventListener('click', (event) => {
+                if (event.target.classList.contains('add-to-cart-btn')) {
+                    const product = {
+                        id: event.target.getAttribute('data-id'),
+                        name: event.target.getAttribute('data-name'),
+                        price: event.target.getAttribute('data-price'),
+                    };
+                    cart.push(product);
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    alert(`${product.name} ha sido agregado al carrito.`);
+                }
+            });
+        </script>
+    </body>
+ 
+</html>
